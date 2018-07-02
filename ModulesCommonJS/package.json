@@ -1,5 +1,11 @@
 {
   "dependencies": {
     "chalk": "^2.4.1"
+  },
+  "main": "run-jeu.js",
+  "scripts": {
+    "start": "node .",
+    "start:esm": "node --experimental-modules jeu-esm/main.mjs",
+    "test": "node run-test.js"
   }
 }
