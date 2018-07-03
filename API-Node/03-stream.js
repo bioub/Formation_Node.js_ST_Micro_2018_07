@@ -21,4 +21,4 @@ gzipFromEditorConfig
 gzipFromEditorConfig
   .pipe(ws) // dans le fichier .editorconfig.gz
 
-// cat .editorconfig | echo
+// cat .editorconfig | gzip | echo
