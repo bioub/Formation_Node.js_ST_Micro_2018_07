@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "ModulesCommonJS"
+		},
+		{
+			"path": "API-Node"
+		},
+		{
+			"path": "ExpressTraditional"
+		},
+		{
+			"path": "ExpressRest"
+		}
+	],
+	"settings": {}
+}

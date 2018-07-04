@@ -7,7 +7,7 @@ const Contact = require('./model');
  * @param {function} next
  */
 exports.list = async (req, res, next) => {
-  const contacts = await Contact.find();
+  const contacts = await Contact.find({}, 'prenom nom');
   res.json(contacts);
 };
 
@@ -20,6 +20,7 @@ exports.list = async (req, res, next) => {
 exports.show = async (req, res, next) => {
   try {
     const contact = await Contact.findById(req.params.id);
+    //const contact = await Contact.findOne({_id: req.params.id});
 
     if (!contact) {
       req.notFoundReason = 'Contact not found';
@@ -41,9 +42,14 @@ exports.show = async (req, res, next) => {
  * @param {function} next
  */
 exports.create = async (req, res, next) => {
-  const contact = await Contact.create(req.body);
-  res.statusCode = 201;
-  res.json(contact);
+  try {
+    const contact = await Contact.create(req.body);
+    res.statusCode = 201;
+    res.json(contact);
+  }
+  catch (err) {
+    next(err);
+  }
 };
 
 /**

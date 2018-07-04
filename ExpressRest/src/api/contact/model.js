@@ -1,27 +1,34 @@
-/*
 const mongoose = require('mongoose');
+
 
 const schema = new mongoose.Schema({
   prenom: {
-    required: true,
+    required: [true, 'Le prénom est obligatoire'],
     type: String,
   },
   nom: {
-    required: true,
+    required: [true, 'Le nom est obligatoire'],
     type: String,
   },
+  /*
+  addresse: {
+    ville: String,
+    cp: String,
+  },
+  */
   email: String,
   telephone: String,
-  societe: {
+  /*societe: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Societe',
-  },
+  },*/
   updated: { type: Date, default: Date.now },
-});
+}, { versionKey: false });
 
 module.exports = mongoose.model('Contact', schema);
-*/
 
+
+/*
 const contacts = [
   {
     id: '123',
@@ -72,4 +79,4 @@ module.exports = class ContactModel {
     return Promise.resolve(contact);
   }
 }
-
+*/
