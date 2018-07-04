@@ -1,4 +1,4 @@
-const notFound = require('../../../src/api/middlewares/not-found');
+const notFound = require('../../src/middlewares/not-found');
 const chai = require('chai');
 const expect = chai.expect;
 const sinon = require('sinon');

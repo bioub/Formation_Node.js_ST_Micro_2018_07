@@ -28,7 +28,7 @@ router.get('/:id', (req, res, next) => {
   if (!contact) {
     return next();
   }
-
+  
   res.render('contacts/show', { contact });
 });
 
