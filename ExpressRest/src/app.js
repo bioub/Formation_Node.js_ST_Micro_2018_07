@@ -2,6 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const config = require('./config');
 const contactRouter = require('./api/contact');
+const societeRouter = require('./api/societe');
+const todoRouter = require('./api/todo');
 const notFound = require('./middlewares/not-found');
 const errorHandler = require('./middlewares/error-handler');
 
@@ -12,6 +14,8 @@ if (!config.production) {
 }
 
 app.use('/api/contacts', contactRouter);
+app.use('/api/societes', societeRouter);
+app.use('/api/todos', todoRouter);
 
 app.use(notFound);
 app.use(errorHandler);

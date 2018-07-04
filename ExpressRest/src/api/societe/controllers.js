@@ -8,7 +8,7 @@ const Model = require('./model');
  */
 exports.list = async (req, res, next) => {
   try {
-    const docs = await Model.find(/*{}, 'prenom nom'*/);
+    const docs = await Model.find();
     res.json(docs);
   }
   catch (err) {
@@ -24,11 +24,11 @@ exports.list = async (req, res, next) => {
  */
 exports.show = async (req, res, next) => {
   try {
-    const doc = await Model.findById(req.params.id).populate('societe');
+    const doc = await Model.findById(req.params.id);
     //const doc = await Model.findOne({_id: req.params.id});
 
     if (!doc) {
-      req.notFoundReason = 'Contact not found';
+      req.notFoundReason = 'Company not found';
       return next();
     }
 

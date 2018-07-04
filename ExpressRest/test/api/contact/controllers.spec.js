@@ -13,7 +13,7 @@ describe('Contact Controller', function() {
   describe('#list()', function() {
 
     beforeEach(() => {
-
+      // mongoimport
     });
 
     it('should call Contact.find and res.json', async function() {
@@ -32,6 +32,25 @@ describe('Contact Controller', function() {
       expect(res.json).to.have.been.calledOnceWith(contacts);
 
       mock.verify();
+
+    });
+
+    it('should call next when Contact.find rejects', async function() {
+
+      const err = {msg: 'C pas bien'};
+
+      const mock = sinon.mock(Contact);
+      mock.expects("find").once().rejects(err);
+      // pour tester les methodes chainées comme .limit() => sinon-mongoose
+
+      const next = sinon.spy();
+
+      await contactCtrl.list(undefined, undefined, next);
+
+      expect(next).to.have.been.calledOnceWith(err);
+
+      mock.verify();
+
     });
 
   });

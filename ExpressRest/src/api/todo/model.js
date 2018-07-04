@@ -2,30 +2,18 @@ const mongoose = require('mongoose');
 
 
 const schema = new mongoose.Schema({
-  prenom: {
-    required: [true, 'Le prénom est obligatoire'],
+  title: {
+    required: [true, 'Le titre est obligatoire'],
     type: String,
   },
-  nom: {
-    required: [true, 'Le nom est obligatoire'],
-    type: String,
-  },
-  /*
-  addresse: {
-    ville: String,
-    cp: String,
-  },
-  */
-  email: String,
-  telephone: String,
-  societe: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Company',
+  completed: {
+    default: true,
+    type: Boolean,
   },
   updated: { type: Date, default: Date.now },
 }, { versionKey: false });
 
-module.exports = mongoose.model('Contact', schema);
+module.exports = mongoose.model('Todo', schema);
 
 
 /*

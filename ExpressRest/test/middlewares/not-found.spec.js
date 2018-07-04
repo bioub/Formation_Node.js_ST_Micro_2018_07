@@ -17,6 +17,10 @@ describe('#notFound()', function() {
     notFound(req, res);
 
     expect(res.statusCode).to.equals(404);
+    // expect(res.json.calledOnce).to.be.true;
+    // peut s'écrire grace à sinon-chai :
     expect(res.json).to.have.been.calledOnce;
+    expect(res.json).to.have.been.calledWith({msg: 'Not Found'});
+
   });
 });
