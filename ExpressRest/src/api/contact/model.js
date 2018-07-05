@@ -25,6 +25,12 @@ const schema = new mongoose.Schema({
   updated: { type: Date, default: Date.now },
 }, { versionKey: false });
 
+/*
+schema.post('remove', () => {
+
+});
+*/
+
 module.exports = mongoose.model('Contact', schema);
 
 

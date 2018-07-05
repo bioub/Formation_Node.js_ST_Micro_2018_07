@@ -65,8 +65,8 @@ exports.create = async (req, res, next) => {
  */
 exports.remove = async (req, res, next) => {
   try {
-    const doc = await Model.findByIdAndRemove(req.params.id)
-  res.json(doc);
+    const doc = await Model.findByIdAndDelete(req.params.id)
+    res.json(doc);
   }
   catch (err) {
     next(err);

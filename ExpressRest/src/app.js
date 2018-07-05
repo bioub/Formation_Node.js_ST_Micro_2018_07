@@ -13,11 +13,17 @@ if (!config.production) {
   app.use(morgan('dev'));
 }
 
+// app.use('/api', auth);
+
 app.use('/api/contacts', contactRouter);
 app.use('/api/societes', societeRouter);
 app.use('/api/todos', todoRouter);
 
-app.use(notFound);
+app.use('/api', notFound);
+app.use(/*'/', */(req, res, next) => {
+  res.statusCode = 404;
+  res.send('<h2>Not Found</h2>');
+});
 app.use(errorHandler);
 
 module.exports = app;

@@ -7,7 +7,7 @@ const sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 
 describe('#notFound()', function() {
-  it('should set statusCode to 404 and call', function() {
+  it('should set statusCode to 404 and call res.json with Not Found', function() {
 
     const req = {};
     const res = {
@@ -21,6 +21,25 @@ describe('#notFound()', function() {
     // peut s'écrire grace à sinon-chai :
     expect(res.json).to.have.been.calledOnce;
     expect(res.json).to.have.been.calledWith({msg: 'Not Found'});
+
+  });
+
+  it('should set statusCode to 404 and call res.json with Custom Msg', function() {
+
+    const req = {
+      notFoundReason: 'Custom'
+    };
+    const res = {
+      json: sinon.fake(),
+    };
+
+    notFound(req, res);
+
+    expect(res.statusCode).to.equals(404);
+    // expect(res.json.calledOnce).to.be.true;
+    // peut s'écrire grace à sinon-chai :
+    expect(res.json).to.have.been.calledOnce;
+    expect(res.json).to.have.been.calledWith({msg: 'Custom'});
 
   });
 });

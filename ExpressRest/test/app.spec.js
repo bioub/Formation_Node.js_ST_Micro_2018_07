@@ -22,6 +22,7 @@ describe('Functionnal tests', function() {
       const res = await chai.request(app).get('/api/contacts');
       expect(res).to.have.status(200);
       expect(res).to.be.json;
+      expect(res.body).to.deep.equals(contacts);
 
       mock.verify();
     });
