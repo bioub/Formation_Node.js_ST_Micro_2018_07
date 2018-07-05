@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const config = require('./config');
 const contactRouter = require('./api/contact');
 const societeRouter = require('./api/societe');
@@ -12,6 +13,18 @@ const app = express();
 if (!config.production) {
   app.use(morgan('dev'));
 }
+
+// Permet les requetes cross-domain
+// en définissant un en-tete Access-Control-Allow-Origin: *
+app.use(cors());
+/*
+app.use((req, res, next) => {
+  if (['localhost:9000', 'st.com'].includes(req.headers.origin)) {
+    res.setHeader('Access-control-allow-origin', req.headers.origin);
+  }
+  next();
+})
+*/
 
 // app.use('/api', auth);
 
