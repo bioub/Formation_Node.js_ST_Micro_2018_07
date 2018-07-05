@@ -29,5 +29,29 @@ describe('Functionnal tests', function() {
 
   });
 
+  describe('POST /api/contacts', function() {
+
+    it('should have status 201 and respond json', async function() {
+      const contact = {prenom: 'A', nom: 'B'};
+
+      const docReturned = {
+        _id: '5b3ca2c13f29e56d81d7157b',
+        updated: Date.now(),
+        ...contact, // ES9 (REST/SPREAD object)
+      };
+
+      const mock = sinon.mock(Contact);
+      mock.expects('create').once().withExactArgs(contact).resolves(docReturned);
+
+      const res = await chai.request(app).post('/api/contacts').send(contact);
+      expect(res).to.have.status(201);
+      expect(res).to.be.json;
+      expect(res.body).to.deep.equals(docReturned);
+
+      mock.verify();
+    });
+
+  });
+
 });
 

@@ -55,5 +55,63 @@ describe('Contact Controller', function() {
 
   });
 
+  describe('#create()',  () => {
+
+
+    it('should set statusCode to 201 and call res.json with the return of Model.create', async () => {
+      const req = {
+        body: {
+          prenom: 'A',
+          nom: 'B',
+        }
+      };
+
+      const res = {
+        json: sinon.fake(),
+      };
+
+      const docReturned = {
+        _id: '5b3ca2c13f29e56d81d7157b',
+        updated: Date.now(),
+        ...req.body, // ES9 (REST/SPREAD object)
+      };
+
+      const mock = sinon.mock(Contact);
+      mock.expects('create').once().withExactArgs(req.body).resolves(docReturned);
+
+      await contactCtrl.create(req, res);
+
+      expect(res.statusCode).to.be.equals(201);
+      expect(res.json).to.have.been.calledOnceWith(docReturned);
+
+      mock.verify();
+    });
+
+    it('should call next when Model.create rejects', async () => {
+      const req = {
+        body: {
+          prenom: 'A',
+          nom: 'B',
+        }
+      };
+
+      const err = {
+        message: 'Some error',
+      };
+
+      const next = sinon.fake();
+
+      const mock = sinon.mock(Contact);
+      mock.expects('create').once().withExactArgs(req.body).rejects(err);
+
+      await contactCtrl.create(req, undefined, next);
+
+      expect(next).to.have.been.calledOnceWith(err);
+
+      mock.verify();
+    });
+
+  });
+
 });
 
